@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { WikiProvider } from './context/WikiContext';
+import {Navigation} from './components/navigation';
+import {Page} from './components/page';
+import {AddPage} from './components/addPage';
 
-function App() {
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <WikiProvider>
+        <Router>
+          <Navigation />
+          <Routes>
+            <Route path="/page/:id" element={<Page />} />
+            <Route path="/add" element={<AddPage />} />
+            <Route path="/" exact element={<h1>Welcome to the Wiki</h1>} />
+          </Routes>
+        </Router>
+      </WikiProvider>
   );
 }
-
-export default App;
