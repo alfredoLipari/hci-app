@@ -3,7 +3,7 @@ import * as React from "react";
 export const Toast = ({mode, message}) => {
   return (
 
-    <div className="mt-3 absolute  flex justify-center w-full " >
+    <div className="mt-3 absolute  flex justify-center w-full z-10" >
         <div id="toast-success" className="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
         {mode === "success" ? (
             <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">

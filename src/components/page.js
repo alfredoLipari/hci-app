@@ -12,8 +12,7 @@ import { Toast } from "./toast.js";
 
 export const Page = ({ idPageOptional }) => {
   const { id } = useParams();
-  const { pages, addComment, language, showToast, setShowToast, isLogged } =
-    useContext(WikiContext);
+  const { pages, addComment, language, showToast, setShowToast, isLogged } = useContext(WikiContext);
   const page = pages.find(
     (p) =>
       (id == null
