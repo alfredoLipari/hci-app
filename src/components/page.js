@@ -12,7 +12,7 @@ import { Toast } from "./toast.js";
 
 export const Page = ({ idPageOptional }) => {
   const { id } = useParams();
-  const { pages, updatePage, language, showToast, isLogged } =
+  const { pages, addComment, language, showToast, setShowToast, isLogged } =
     useContext(WikiContext);
   const page = pages.find(
     (p) =>
@@ -24,6 +24,15 @@ export const Page = ({ idPageOptional }) => {
   const [content, setContent] = useState(page.content);
 
   const [comment, setComment] = useState("");
+
+  const handleComment = () => {
+    addComment(page.id, comment); 
+    setShowToast({ mode: "success", message: "Comment added!", show: true });
+    setComment("");
+    setTimeout(() => {
+        setShowToast({ mode: "success", message: "", show: false });
+        }, 3000);
+  }
 
   return (
     <div>
@@ -78,7 +87,7 @@ export const Page = ({ idPageOptional }) => {
             Posting as username
             <br />
           </div>
-          <div className="flex flex-col justify-center text-xs text-center text-neutral-100">
+          <div className="flex flex-col justify-center text-xs text-center text-neutral-100" onClick={() => comment !== '' && handleComment()}>
             <div className="flex gap-1 items-start py-1 pr-5 pl-px bg-sky-500 rounded-xl border border-solid shadow-sm border-white border-opacity-30">
               <img
                 loading="lazy"
@@ -86,15 +95,15 @@ export const Page = ({ idPageOptional }) => {
                 className="shrink-0 self-start w-6 aspect-square"
                 alt="post Comment"
               />
-              <div className="my-auto">Post comment</div>
+              <div className="my-auto">Comment</div>
             </div>
           </div>
         </div>
 
         {/* Comments List */}
         {page.comments.map((comment, index) => (
-          <div className="flex flex-col justify-center px-4 text-white rounded">
-            <div className="flex flex-col py-3 bg-blue-700 border border-solid shadow-sm border-white border-opacity-20">
+          <div className="flex flex-col justify-center px-4 text-white rounded my-3 shadow-sm" key={index}>
+            <div className="flex flex-col py-3 bg-blue-700 border border-solid shadow-sm border-white border-opacity-20  rounded shadow-sm">
               <div className="text-xs font-light text-center text-stone-300">username esempio</div>
 
               <div className="mt-2 text-xs px-5">

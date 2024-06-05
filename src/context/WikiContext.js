@@ -5,7 +5,7 @@ export const WikiContext = createContext();
 
 export const WikiProvider = ({ children }) => {
     const [pages, setPages] = useState([
-        { id: 1, tags: ['homepage'], title: 'Home', subtitle: 'Subtitle', comments: ['1'], content: '<><Hero title="Welcome to the Wiki!" subtitle="this is a subtitle" /> <FirstTitle title="Contents" /> <LinkComponent title="Personal Documents" />  <LinkComponent title="Employment Agency" /> <FirstTitle title="Choose your route" /> <SecondTitle title="Are you a mother?" /> <Paragraph title="this is a paragraph"/> <LinkComponent title="Discover your rights: Maternity" /> </>', language: 'en', subPages: [2, 3] },
+        { id: 1, tags: ['homepage'], title: 'Home', subtitle: 'Subtitle', comments: ['This is an example comment!'], content: '<><Hero title="Welcome to the Wiki!" subtitle="this is a subtitle" /> <FirstTitle title="Contents" /> <LinkComponent title="Personal Documents" />  <LinkComponent title="Employment Agency" /> <FirstTitle title="Choose your route" /> <SecondTitle title="Are you a mother?" /> <Paragraph title="this is a paragraph"/> <LinkComponent title="Discover your rights: Maternity" /> </>', language: 'en', subPages: [2, 3] },
         { id: 2, tags: ['documents'], title: 'Personal Documents', subtitle: 'Subtitle', comments: [],  content: 'Content of Page 1', language: 'en', subPages: [] },
         { id: 3, tags: ['agency', 'work'], subtitle: 'Subtitle', title: 'Employment Agency', comments: [],  content: '<LinkComponent title="Personal Documents" />', language: 'en', subPages: [] },
         { id: 4, tags: ['mother'], title: 'Discover your rights: Maternity', subtitle: 'Subtitle', comments: [],  content: '<LinkComponent title="Personal Documents" />', language: 'en', subPages: [] },
@@ -36,8 +36,15 @@ export const WikiProvider = ({ children }) => {
         setPages(updatedPages);
     };
 
+    const addComment = (id, comment) => {
+        const updatedPages = pages.map(page =>
+            page.id === id ? { ...page, comments: [...page.comments, comment] } : page
+        );
+        setPages(updatedPages);
+    }
+
     return (
-        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, language, setLanguage,languages, showToast, setShowToast, setIsLogged  }}>
+        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, language, setLanguage,languages, showToast, setShowToast, setIsLogged, addComment  }}>
             {children}
         </WikiContext.Provider>
     );
