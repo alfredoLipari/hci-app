@@ -21,7 +21,7 @@ const idPage = pages.find(p => p.title === title).id;
         
       </div>
       <div className="flex-auto my-auto text-sm font-semibold text-blue-700">
-        <Link to={"/page/"+ idPage}>{title}</Link>
+        <Link to={"/page/" + idPage }>{title}</Link>
       </div>
     </div>
   </div>

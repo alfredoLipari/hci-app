@@ -5,11 +5,11 @@ export const WikiContext = createContext();
 
 export const WikiProvider = ({ children }) => {
     const [pages, setPages] = useState([
-        { id: 1, tags: ['homepage'], title: 'Home', content: '<><Hero title="Welcome to the Wiki!" subtitle="this is a subtitle" /> <FirstTitle title="Contents" /> <LinkComponent title="Personal Documents" />  <LinkComponent title="Employment Agency" /> <FirstTitle title="Choose your route" /> <SecondTitle title="Are you a mother?" />  <LinkComponent title="Discover your rights: Maternity" /> </>', language: 'en', subPages: [2, 3] },
-        { id: 2, tags: ['documents'], title: 'Personal Documents', content: 'Content of Page 1', language: 'en', subPages: [] },
-        { id: 3, tags: ['agency', 'work'], title: 'Employment Agency', content: '<LinkComponent title="Personal Documents" />', language: 'en', subPages: [] },
-        { id: 4, tags: ['mother'], title: 'Discover your rights: Maternity', content: '<LinkComponent title="Personal Documents" />', language: 'en', subPages: [] },
-        { id: 1, tags: ['homepage'], title: 'Home', content: '<><Hero title="Benvenuto nella wiki!" subtitle="Questo è un sottotitolo" /> <FirstTitle title="Metti qua sotto qualcosa" /> </>', language: 'it', subPages: [2, 3] }
+        { id: 1, tags: ['homepage'], title: 'Home', subtitle: 'Subtitle', content: '<><Hero title="Welcome to the Wiki!" subtitle="this is a subtitle" /> <FirstTitle title="Contents" /> <LinkComponent title="Personal Documents" />  <LinkComponent title="Employment Agency" /> <FirstTitle title="Choose your route" /> <SecondTitle title="Are you a mother?" /> <Paragraph title="this is a paragraph"/> <LinkComponent title="Discover your rights: Maternity" /> </>', language: 'en', subPages: [2, 3] },
+        { id: 2, tags: ['documents'], title: 'Personal Documents', subtitle: 'Subtitle', content: 'Content of Page 1', language: 'en', subPages: [] },
+        { id: 3, tags: ['agency', 'work'], subtitle: 'Subtitle', title: 'Employment Agency', content: '<LinkComponent title="Personal Documents" />', language: 'en', subPages: [] },
+        { id: 4, tags: ['mother'], title: 'Discover your rights: Maternity', subtitle: 'Subtitle', content: '<LinkComponent title="Personal Documents" />', language: 'en', subPages: [] },
+        { id: 1, tags: ['homepage'], title: 'Home', subtitle: 'Subtitle', content: '<><Hero title="Benvenuto nella wiki!" subtitle="Questo è un sottotitolo" /> <FirstTitle title="Metti qua sotto qualcosa" /> </>', language: 'it', subPages: [2, 3] }
     ]);
 
     const [language, setLanguage] = useState('en')
@@ -17,6 +17,12 @@ export const WikiProvider = ({ children }) => {
     const [languages] = useState(['en', 'it']);
 
     const [isLogged, setIsLogged] = useState(false);
+
+    const [showToast, setShowToast] = useState({
+        "mode": "success",
+        "message": "test",
+        "show": false
+    })
 
     const logout = () => {
         setIsLogged(false);
@@ -39,7 +45,7 @@ export const WikiProvider = ({ children }) => {
     };
 
     return (
-        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, login, logout, language, setLanguage,languages  }}>
+        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, login, logout, language, setLanguage,languages, showToast, setShowToast  }}>
             {children}
         </WikiContext.Provider>
     );

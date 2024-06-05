@@ -7,10 +7,12 @@ import {Header} from './header.js';
 import {Hero} from './hero.js'
 import {FirstTitle} from './firstTitle.js'
 import {SecondTitle} from './secondTitle.js'
+import {Paragraph} from './paragraph.js'
+import {Toast} from './toast.js'
 
 export const Page = ({idPageOptional}) => {
     const { id } = useParams();
-    const { pages, updatePage, language } = useContext(WikiContext);
+    const { pages, updatePage, language, showToast } = useContext(WikiContext);
     const page = pages.find(p => (id == null ? p.id === parseInt(idPageOptional) : p.id === parseInt(id)) && p.language === language);
 
     const [isEditing, setIsEditing] = useState(false);
@@ -21,9 +23,12 @@ export const Page = ({idPageOptional}) => {
         setIsEditing(false);
     };
 
+    console.log("content", page.content)
+
     return (
         <div>
             <Header />
+            {showToast.show && <Toast mode={showToast.mode} message={showToast.message} />}
             {isEditing ? (
                 <div>
                     <textarea value={content} onChange={(e) => setContent(e.target.value)} />
@@ -32,10 +37,10 @@ export const Page = ({idPageOptional}) => {
             ) : (
                 <div>
                     <JsxParser
-                        components={{Link,LinkComponent,Hero, FirstTitle,SecondTitle}}
+                        components={{Link,LinkComponent,Hero, FirstTitle,SecondTitle,Paragraph}}
                         jsx={page.content}
                     />
-                    <button onClick={() => setIsEditing(true)}>Edit</button>
+                    <Link to={"/edit/"+ page.id}>Edit</Link>
                 </div>
             )}
         </div>

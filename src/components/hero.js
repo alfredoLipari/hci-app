@@ -7,7 +7,7 @@ export const Hero = ({title, subtitle}) => {
         <div className="text-2xl text-neutral-700">
           {title}
         </div>
-        <div className="mt-3.5 text-xs text-neutral-500">
+        <div className="mt-3.5 text-sm text-neutral-500">
           {subtitle}
         </div>
       </div>
