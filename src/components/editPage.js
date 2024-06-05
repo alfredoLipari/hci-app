@@ -132,7 +132,7 @@ export const EditPage = () => {
       </div>
     
       <div className="flex gap-5 justify-between px-px mt-20 w-full text-base font-semibold text-center text-neutral-100">
-        <div className="justify-center px-9 py-3 whitespace-nowrap bg-red-600 rounded-xl border border-solid shadow-sm border-white border-opacity-30">
+        <div className="justify-center px-9 py-3 whitespace-nowrap bg-red-600 rounded-xl border border-solid shadow-sm border-white border-opacity-30" onClick={() => navigate(-1)}>
           Cancel
         </div>
         <div className="justify-center px-4 py-2.5 bg-green-800 rounded-xl border border-solid shadow-sm border-white border-opacity-30" onClick={handleSave}>
