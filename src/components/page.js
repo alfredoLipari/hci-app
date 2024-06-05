@@ -29,20 +29,14 @@ export const Page = ({idPageOptional}) => {
         <div>
             <Header />
             {showToast.show && <Toast mode={showToast.mode} message={showToast.message} />}
-            {isEditing ? (
-                <div>
-                    <textarea value={content} onChange={(e) => setContent(e.target.value)} />
-                    <button onClick={handleSave}>Save</button>
-                </div>
-            ) : (
+           
                 <div>
                     <JsxParser
                         components={{Link,LinkComponent,Hero, FirstTitle,SecondTitle,Paragraph}}
                         jsx={page.content}
                     />
-                    <Link to={"/edit/"+ page.id}>Edit</Link>
                 </div>
-            )}
+            
         </div>
     );
 };

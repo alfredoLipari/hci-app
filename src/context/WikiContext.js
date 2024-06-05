@@ -24,14 +24,6 @@ export const WikiProvider = ({ children }) => {
         "show": false
     })
 
-    const logout = () => {
-        setIsLogged(false);
-    };
-
-    const login = () => {
-        setIsLogged(true);
-    }
-
     const addPage = (title, content, language) => {
         const newPage = { id: pages.length + 1, title, content, language, subPages: [] };
         setPages([...pages, newPage]);
@@ -45,7 +37,7 @@ export const WikiProvider = ({ children }) => {
     };
 
     return (
-        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, login, logout, language, setLanguage,languages, showToast, setShowToast  }}>
+        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, language, setLanguage,languages, showToast, setShowToast, setIsLogged  }}>
             {children}
         </WikiContext.Provider>
     );

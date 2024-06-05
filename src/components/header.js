@@ -4,15 +4,22 @@ import bookImage from "../icons/icon _book_open.png";
 import worldImage from "../icons/world.png";
 import profileImage from "../icons/profile.png";
 import searchImage from "../icons/search.png";
-import {Link, useNavigate} from 'react-router-dom';
+import profileLogin from "../icons/profile-login.png";
+import addPageImage from "../icons/add_page.png";
+import editPageImage from "../icons/edit-page.png";
+
+import {Link, useNavigate, useParams} from 'react-router-dom';
 
 import { WikiContext } from '../context/WikiContext';
 
 export const Header = () => {
 
-   const navigate = useNavigate();
+    const { id } = useParams();
+    
+    const pageId = id === null || isNaN(id) || id === undefined ? 1 : parseInt(id);
+    const navigate = useNavigate();
 
-    const {languages,language, setLanguage, pages } = useContext(WikiContext)
+    const {languages,language, setLanguage, pages, isLogged, setIsLogged } = useContext(WikiContext)
 
     const [openLanugage, setOpenLanguage] = useState(false)
 
@@ -21,16 +28,24 @@ export const Header = () => {
     const [valueSearch, setValueSearch] = useState('')
 
   return (
-    <div className="flex flex-auto flex-col pt-3 mt-5 text-xl font-bold text-center text-black border-b border-black border-solid max-w-[600px]">
+    <div className="flex flex-auto flex-col pt-3 mt-5 text-xl font-bold text-center text-black border-b border-black border-solid ">
       <div className="flex self-center max-w-[404px]">
         <div className="flex flex-auto  px-3">
           <img src={bookImage} className="w-9 h-9" alt='icon_book_open' onClick={() => navigate('/')}/>
-          <div className="flex self-center mx-5">Wiki for immigrants</div>
+          <div className={`flex self-center ${isLogged ? "mx-2" : "mx-5" }`}>Wiki for immigrants</div>
+          {!isLogged &&  
           <button type="button" className="inline-flex justify-center  text-sm font-semibold text-gray-900" id="menu-button" aria-expanded="true" aria-haspopup="true" onClick={() => setOpenLanguage(!openLanugage)}>
             <img src={worldImage} className="w-6 h-6 mx-1 flex self-center" alt='icon_book_open' />
-          </button>
+          </button>}
+         
           <img src={searchImage} className="w-6 h-6 mx-2 flex self-center" alt='search' onClick={() => setOpenSearch(!openSearch)} />
-          <img src={profileImage} className="w-6 h-6 mx-1 flex self-center" alt='profile' />
+          {isLogged && 
+            <>
+             <Link to={"/edit/"+ pageId} className="flex self-center"> <img src={editPageImage} className="w-6 h-6 mx-1 flex self-center" alt='add_page' /></Link>
+             <img src={addPageImage} className="w-6 h-6 mx-1 flex self-center" alt='edit_page' />
+            </>
+          }
+          <img src={!isLogged ? profileImage : profileLogin} className="w-6 h-6 mx-1 flex self-center" alt='profile' onClick={() => setIsLogged(!isLogged)}/>
         </div>
 
       </div>
