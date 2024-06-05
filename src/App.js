@@ -9,11 +9,11 @@ export function App() {
   return (
       <WikiProvider>
         <Router>
-          <Navigation />
+        {/*  <Navigation /> */}  
           <Routes>
             <Route path="/page/:id" element={<Page />} />
             <Route path="/add" element={<AddPage />} />
-            <Route path="/" exact element={<h1>Welcome to the Wiki</h1>} />
+            <Route path="/" exact element={<Page idPageOptional="1"/>} />
           </Routes>
         </Router>
       </WikiProvider>
