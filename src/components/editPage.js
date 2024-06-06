@@ -30,6 +30,8 @@ export const EditPage = () => {
 
     const [tags, setTags] = useState(page?.tags);
 
+    const [modalInfo, setModalInfo] = useState(false)
+
     const jsxStringToComponents = (jsxString) => {
         return jsxString
           .replace(/<Hero\s*[^>]*\/>/g, '') // Remove <Hero />
@@ -132,6 +134,7 @@ export const EditPage = () => {
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/d4faa923e8432c3cc6fdca86b327589ecfa8847ebda9e94d11dc45ca8f8e945e?"
           className="shrink-0 aspect-square w-[30px]"
+          alt="tags"
         />
       </div>
       <div className="flex gap-3 self-start mt-4 text-sm font-medium tracking-wide text-center text-white whitespace-nowrap">
@@ -144,6 +147,13 @@ export const EditPage = () => {
       </div>
       <div className="mt-10 w-full text-sm font-medium tracking-wide text-neutral-900 text-opacity-90">
         Content
+        <span
+        className="ml-2 cursor-pointer text-blue-600 text-m"
+        onClick={() => setModalInfo(!modalInfo)}
+        title="More Info"
+      >
+        ℹ️
+      </span>
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col pt-2.5 pr-0.5 pb-1 pl-4 mt-5 bg-white rounded border border-solid border-gray-700 border-opacity-20">
@@ -167,6 +177,47 @@ export const EditPage = () => {
       </div>
     
     </div>
+
+    {modalInfo  &&  <div id="extralarge-modal" tabIndex="-1" className="fixed top-40 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div className="relative w-full max-w-7xl max-h-full">
+
+                    <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
+
+                        <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 ">
+                            <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+                                Info about the content
+                            </h3>
+                            <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="extralarge-modal" onClick={() => setModalInfo('')}>
+                                <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span className="sr-only">Close modal</span>
+                            </button>
+                        </div>
+
+                        <div className="p-4 md:p-5 space-y-4 dark:text-white">
+                        {/* List with bullet points the informations about how to format the content: h1:title renders a title , h2:title renders a smaller title */}
+                            <h3 className="text-lg font-semibold">How to format the content</h3>
+                            <ul className="list-disc list-inside">
+                                <li>h1:Title renders a title</li>
+                                <li>h2:Subtitle renders a smaller title</li>
+                                <li>link:Title renders a link to another page</li>
+                                <li>p:Text renders a paragraph</li>
+                            </ul>
+
+                            {/* list with bullet points all the available link */}
+                            <h3 className="text-lg font-semibold">Available links</h3>
+                            <ul className="list-disc list-inside">
+                                {availableLinks.map((link) => (
+                                    <li key={link}>{link}</li>
+                                ))}
+                              </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>}
     </>
   );
 }

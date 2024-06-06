@@ -82,23 +82,24 @@ export const Page = ({ idPageOptional }) => {
                     </div>
                 </div>
 
-                <div className="flex gap-5 justify-between pb-2 px-3">
-                    <div className="my-auto text-sm tracking-wide text-black">
-                        Posting as username
-                        <br />
-                    </div>
-                    <div className="flex flex-col justify-center text-xs text-center text-neutral-100" onClick={() => comment !== '' && handleComment()}>
-                        <div className="flex gap-1 items-start py-1 pr-5 pl-px bg-sky-500 rounded-xl border border-solid shadow-sm border-white border-opacity-30">
-                            <img
-                                loading="lazy"
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d5e774395316f45ce906a51493ed83300e0a59d7cde79c688504b17194b67f?"
-                                className="shrink-0 self-start w-6 aspect-square"
-                                alt="post Comment"
-                            />
-                            <div className="my-auto">Comment</div>
-                        </div>
-                    </div>
-                </div>
+     {isLogged &&  <div className="flex gap-5 justify-between pb-2 px-3">
+          <div className="my-auto text-sm tracking-wide text-black">
+            Posting as username
+            <br />
+          </div>
+          <div className="flex flex-col justify-center text-xs text-center text-neutral-100" onClick={() => comment !== '' && handleComment()}>
+            <div className="flex gap-1 items-start py-1 pr-5 pl-px bg-sky-500 rounded-xl border border-solid shadow-sm border-white border-opacity-30">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d5e774395316f45ce906a51493ed83300e0a59d7cde79c688504b17194b67f?"
+                className="shrink-0 self-start w-6 aspect-square"
+                alt="post Comment"
+              />
+              <div className="my-auto">Comment</div>
+            </div>
+          </div>
+        </div> }
+       
 
                 {/* Comments List */}
                 {page.comments.map((comment, index) => (

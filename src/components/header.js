@@ -19,7 +19,7 @@ export const Header = (props) => {
     const pageId = id === null || isNaN(id) || id === undefined ? 1 : parseInt(id);
     const navigate = useNavigate();
 
-    const {languages,language, setLanguage, pages, isLogged, setIsLogged } = useContext(WikiContext)
+    const {languages,language, setLanguage, pages, isLogged, setIsLogged, setShowToast } = useContext(WikiContext)
 
     const [openLanugage, setOpenLanguage] = useState(false)
 
@@ -47,6 +47,7 @@ export const Header = (props) => {
                     }
                     <img src={!isLogged ? profileImage : profileLogin} className="w-6 h-6 mx-1 flex self-center" alt='profile' onClick={() => {
                         if(isLogged) {
+                            setShowToast({ mode: "success", message: "Logout successful!", show: true });
                             setIsLogged(false)
                         }
                         else {
