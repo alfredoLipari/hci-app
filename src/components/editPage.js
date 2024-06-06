@@ -2,13 +2,15 @@ import react, {useState, useContext} from "react";
 import { WikiContext } from '../context/WikiContext';
 import {Link, useParams, useNavigate  } from 'react-router-dom';
 import bookImage from "../icons/icon _book_open.png";
+import { Toast } from "./toast.js";
 
 export const EditPage = () => {
     
     const navigate = useNavigate();
     const { id } = useParams();
-    const { pages, updatePage, language, setShowToast } = useContext(WikiContext);
+    const { pages, updatePage, language, setShowToast, showToast } = useContext(WikiContext);
     const page = pages.find(p => (p.id === parseInt(id)) && p.language === language);
+    const availableLinks = pages.filter(p => p.language === language).map(p => p.title);
  
     const getTitleFromJSX = (jsxString) => {
         const regex = /<Hero\s+title="([^"]+)"/;
@@ -46,13 +48,25 @@ export const EditPage = () => {
 
         // Process each line individually to prevent overlaps
         const lines = componentString.split(/ (?=h1:|h2:|link:|p:)/);  // Splitting while keeping delimiters
+
+        console.log('availableLinks', availableLinks);
+
         for (const line of lines) {
             if (line.startsWith('h1:')) {
                 transformed += line.replace(/h1:([^<]+)/, (_, value) => `<FirstTitle title="${value.trim()}" />`);
             } else if (line.startsWith('h2:')) {
                 transformed += line.replace(/h2:([^<]+)/, (_, value) => `<SecondTitle title="${value.trim()}" />`);
             } else if (line.startsWith('link:')) {
-                transformed += line.replace(/link:([^<]+)/, (_, value) => `<LinkComponent title="${value.trim()}" />`);
+                transformed += line.replace(/link:([^<]+)/, (_, value) => {
+                    console.log('ciao', value);
+                    // check if value is equal to the available Links if not return error
+                    if (!availableLinks.includes(value.trim())) {
+                        console.error(`Link "${value.trim()}" not found in available links`);
+                        setShowToast({mode: 'error', message: `Link "${value.trim()}" not found in available links`, show: true});
+                        return `Link "${value.trim()}" not found in available links`;
+                    }
+                    return `<LinkComponent title="${value.trim()}" />`;
+                })
             } else if (line.startsWith('p:')) {
                 transformed += line.replace(/p:([^<]+)/, (_, value) => `<Paragraph title="${value.trim()}" />`);
             }
@@ -71,14 +85,19 @@ export const EditPage = () => {
             setShowToast({mode: 'success', message: '', show: false});
         }
         , 3000);
+        const result = componentsToJsxString(paragraphs);
+        // check if result contains the error link in case show the toast
+        if (result.includes('available links')) {
+            return;
+        }
         updatePage(page.id, componentsToJsxString(paragraphs));
         navigate("/page/"+ page.id);
     };
 
   return (
     <>
-        <div className="flex flex-auto flex-col pt-3 mt-5 text-xl font-bold text-center text-black border-b border-black border-solid max-w-[600px]">
-            <div className="flex self-center max-w-[404px]">
+        <div className="flex flex-auto flex-col pt-3 mt-5 text-xl font-bold text-center text-black border-b border-black border-solid">
+            <div className="flex self-center">
                 <div className="flex flex-auto  px-3">
                     <img src={bookImage} className="w-9 h-9" alt='icon_book_open' />
                     <div className="flex self-center mx-5">Wiki for immigrants</div>
@@ -87,7 +106,14 @@ export const EditPage = () => {
             <div className="mt-6 w-full bg-zinc-300 min-h-[1px]" />
         </div>
           
-    <div className="mt-6 flex flex-col px-5 max-w-[600px]">
+    <div className="mt-6 flex flex-col px-5">
+        {showToast.show && (
+            <Toast mode={showToast.mode} message={showToast.message} />
+        )}
+        {/* Add title  */}
+        <div className="flex flex-col text-2xl font-bold text-blue-700 whitespace-nowrap self-center my-3 px-5">
+            Edit  {page?.title}
+        </div>
       <div className="w-full text-sm font-medium tracking-wide text-neutral-900 text-opacity-90">
         Title
       </div>
