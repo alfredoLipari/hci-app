@@ -66,7 +66,7 @@ export const Page = ({ idPageOptional }) => {
                             <div className="flex-auto my-auto">Comments</div>
                         </div>
                         <div className="justify-center shadow-sm items-start py-2 pr-2 pl-4 mt-1.5 w-full tracking-wide bg-white rounded-lg border-0 border-solid border-neutral-900 border-opacity-10 text-neutral-900 text-opacity-40">
-                            {isLogged ? (
+                            {!isLogged ? (
                                 "Log in to comment!"
                             ) : (
                                 <textarea
