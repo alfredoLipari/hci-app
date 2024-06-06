@@ -12,7 +12,7 @@ import {Link, useNavigate, useParams} from 'react-router-dom';
 
 import {WikiContext} from '../context/WikiContext';
 
-export const Header = () => {
+export const Header = (props) => {
 
     const { id } = useParams();
 
@@ -42,7 +42,7 @@ export const Header = () => {
                     {isLogged &&
                         <>
                             <Link to={"/edit/"+ pageId} className="flex self-center"> <img src={editPageImage} className="w-6 h-6 mx-1 flex self-center" alt='add_page' /></Link>
-                            <img src={addPageImage} className="w-6 h-6 mx-1 flex self-center" alt='edit_page' />
+                            <img src={addPageImage} className="w-6 h-6 mx-1 flex self-center" alt='edit_page' onClick={props.openAddPagePopup}/>
                         </>
                     }
                     <img src={!isLogged ? profileImage : profileLogin} className="w-6 h-6 mx-1 flex self-center" alt='profile' onClick={() => {

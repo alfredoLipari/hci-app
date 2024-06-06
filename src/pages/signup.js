@@ -15,7 +15,6 @@ export const SignupPage = () => {
     const [verify, setVerify] = useState('')
     return (
         <>
-            <Header/>
             {showToast.show && (
                 <div className={'z-50'}> <Toast mode={showToast.mode} message={showToast.message} /></div>
             )}

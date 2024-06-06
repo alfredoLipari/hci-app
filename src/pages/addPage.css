@@ -1,0 +1,14 @@
+
+.addPage-popup-content {
+    background-color: #fff; /* White background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 1001; /* Ensures the popup is above the overlay */
+    width: 80%; /* Responsive width */
+    max-width: 500px; /* Maximum width */
+}
+
+.addPage-popup-overlay {
+    background: rgba(0, 0, 0, .5);
+}

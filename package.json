@@ -12,6 +12,8 @@
     "react-jsx-parser": "^1.29.0",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
+    "reactjs-popup": "^2.0.6",
     "tailwindcss": "^3.4.3",
     "web-vitals": "^2.1.4"
   },

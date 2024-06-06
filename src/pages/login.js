@@ -12,7 +12,6 @@ export const LoginPage = () => {
 
     return (
         <>
-        <Header/>
             <div className="flex overflow-hidden relative flex-col px-4 pt-8 pb-20 max-w-[430px] min-h-[792px]">
                 <img
                     loading="lazy"
