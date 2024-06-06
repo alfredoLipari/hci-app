@@ -7,6 +7,7 @@ import searchImage from "../icons/search.png";
 import profileLogin from "../icons/profile-login.png";
 import addPageImage from "../icons/add_page.png";
 import editPageImage from "../icons/edit-page.png";
+import logout from "../icons/logout.svg";
 
 import {Link, useNavigate, useParams} from 'react-router-dom';
 
@@ -15,8 +16,7 @@ import {WikiContext} from '../context/WikiContext';
 export const Header = (props) => {
 
     const { id } = useParams();
-
-    const pageId = id === null || isNaN(id) || id === undefined ? 1 : parseInt(id);
+    console.log('newId', id)
     const navigate = useNavigate();
 
     const {languages,language, setLanguage, pages, isLogged, setIsLogged, setShowToast } = useContext(WikiContext)
@@ -41,11 +41,11 @@ export const Header = (props) => {
                     <img src={searchImage} className="w-6 h-6 mx-2 flex self-center" alt='search' onClick={() => setOpenSearch(!openSearch)} />
                     {isLogged &&
                         <>
-                            <Link to={"/edit/"+ pageId} className="flex self-center"> <img src={editPageImage} className="w-6 h-6 mx-1 flex self-center" alt='add_page' /></Link>
+                            <Link to={"/edit/"+ (id || 1)} className="flex self-center"> <img src={editPageImage} className="w-6 h-6 mx-1 flex self-center" alt='add_page' /></Link>
                             <img src={addPageImage} className="w-6 h-6 mx-1 flex self-center" alt='edit_page' onClick={props.openAddPagePopup}/>
                         </>
                     }
-                    <img src={!isLogged ? profileImage : profileLogin} className="w-6 h-6 mx-1 flex self-center" alt='profile' onClick={() => {
+                    <img src={!isLogged ? profileImage : logout} className="w-6 h-6 mx-1 flex self-center" alt='profile' onClick={() => {
                         if(isLogged) {
                             setShowToast({ mode: "success", message: "Logout successful!", show: true });
                             setIsLogged(false)
@@ -73,7 +73,10 @@ export const Header = (props) => {
             {openLanugage && <div className="absolute right-0 z-10 mt-10 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                 <div className="py-1" role="none">
                     {languages.map((languageAvailable) => (
-                        <a className={` ${languageAvailable == language ? 'bg-blue-500' : 'text-gray-700 '} block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0"`} onClick={() => setLanguage(languageAvailable)} key={languageAvailable}>{languageAvailable}</a>
+                        <a className={` ${languageAvailable == language ? 'bg-blue-500' : 'text-gray-700 '} block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0"`} onClick={() => {
+                            setLanguage(languageAvailable);
+                            setOpenLanguage(false)
+                        }} key={languageAvailable}>{languageAvailable}</a>
                     ))}
 
                 </div>
@@ -100,7 +103,10 @@ export const Header = (props) => {
                         <div className="p-4 md:p-5 space-y-4">
                             {pages.filter(page => (page.tags.some(tag => tag.toLowerCase().includes(valueSearch.toLowerCase())) && language === page.language  )).map(page => (
                                 <div className="flex items center justify-between" key={page.id}>
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col" onClick={() => {
+                                        setOpenSearch(false)
+                                        setValueSearch('')
+                                    }}>
                                         <Link to={"/page/"+ page.id} className="text-lg font-medium text-gray-900 dark:text-white">{page.title}</Link>
                                     </div>
                                 </div>

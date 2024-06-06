@@ -6,7 +6,7 @@ export const WikiContext = createContext();
 export const WikiProvider = ({ children }) => {
     const [pages, setPages] = useState([
         { id: 1, tags: ['homepage'], title: 'Home', subtitle: 'Subtitle', comments: ['This is an example comment!'], content: '<><Hero title="Welcome to the Wiki!" subtitle="this is a subtitle" /> <FirstTitle title="Contents" /> <LinkComponent title="Personal Documents" />  <LinkComponent title="Employment Agency" /> <FirstTitle title="Choose your route" /> <SecondTitle title="Are you a mother?" /> <Paragraph title="this is a paragraph"/> <LinkComponent title="Discover your rights: Maternity" /> </>', language: 'en', subPages: [2, 3] },
-        { id: 2, tags: ['documents'], title: 'Personal Documents', subtitle: 'Subtitle', comments: [],  content: 'Content of Page 1', language: 'en', subPages: [] },
+        { id: 2, tags: ['documents'], title: 'Personal Documents', subtitle: 'Subtitle', comments: [],  content: 'Content of Page 2', language: 'en', subPages: [] },
         { id: 3, tags: ['agency', 'work'], subtitle: 'Subtitle', title: 'Employment Agency', comments: [],  content: '<LinkComponent title="Personal Documents" />', language: 'en', subPages: [] },
         { id: 4, tags: ['mother'], title: 'Discover your rights: Maternity', subtitle: 'Subtitle', comments: [],  content: '<LinkComponent title="Personal Documents" />', language: 'en', subPages: [] },
         { id: 1, tags: ['homepage'], title: 'Home', subtitle: 'Subtitle', comments: [],  content: '<><Hero title="Benvenuto nella wiki!" subtitle="Questo è un sottotitolo" /> <FirstTitle title="Metti qua sotto qualcosa" /> </>', language: 'it', subPages: [2, 3] }
@@ -29,9 +29,9 @@ export const WikiProvider = ({ children }) => {
         setPages([...pages, newPage]);
     };
 
-    const updatePage = (id, updatedContent) => {
+    const updatePage = (id, updatedContent, newTags) => {
         const updatedPages = pages.map(page =>
-            page.id === id ? { ...page, content: updatedContent } : page
+            page.id === id ? { ...page, content: updatedContent, tags: newTags } : page
         );
         setPages(updatedPages);
     };
@@ -44,7 +44,7 @@ export const WikiProvider = ({ children }) => {
     }
 
     return (
-        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, language, setLanguage,languages, showToast, setShowToast, setIsLogged, addComment  }}>
+        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, language, setLanguage,languages, showToast, setShowToast, setIsLogged, addComment, setPages }}>
             {children}
         </WikiContext.Provider>
     );

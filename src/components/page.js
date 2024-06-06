@@ -13,6 +13,7 @@ import {AddPagePopup} from "../pages/addPage";
 
 export const Page = ({ idPageOptional }) => {
     const { id } = useParams();
+    console.log('newIdCorrect', id)
     const { pages, addComment, language, showToast, setShowToast, isLogged } = useContext(WikiContext);
     const page = pages.find(
         (p) =>
@@ -36,7 +37,6 @@ export const Page = ({ idPageOptional }) => {
 
     return (
         <div>
-            <AddPagePopup />
             {showToast.show && (
                 <Toast mode={showToast.mode} message={showToast.message} />
             )}
