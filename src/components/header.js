@@ -36,11 +36,11 @@ export const Header = (props) => {
             <div className="flex self-center max-w-[404px]">
                 <div className="flex flex-auto  px-3">
                     <img src={bookImage} className="w-9 h-9" alt='icon_book_open' onClick={() => navigate('/')}/>
-                    <div className={`flex self-center ${isLogged ? "mx-2" : "mx-5" }`}>Wiki for immigrants</div>
-                    {!isLogged &&
+                    <div className={`flex self-center ${isLogged ? "mx-2" : "mx-5" }`}>{isLogged ? 'Wiki Admin'  : 'Wiki for immigrants' }</div>
+                    
                         <button type="button" className="inline-flex justify-center  text-sm font-semibold text-gray-900" id="menu-button" aria-expanded="true" aria-haspopup="true" onClick={() => setOpenLanguage(!openLanugage)}>
                             <img src={worldImage} className="w-6 h-6 mx-1 flex self-center" alt='icon_book_open' />
-                        </button>}
+                        </button>
 
                     <img src={searchImage} className="w-6 h-6 mx-2 flex self-center" alt='search' onClick={() => setOpenSearch(!openSearch)} />
                     {isLogged &&

@@ -44,6 +44,8 @@ export const EditPage = () => {
     const [showNewTag, setShowNewTag] = useState(false);
     const [newTag, setNewTag] = useState('');
 
+    const [showSaveModal, setShowSaveModal] = useState(false);
+
     const jsxStringToComponents = (jsxString) => {
         if(!jsxString) {
             return ''
@@ -151,6 +153,23 @@ export const EditPage = () => {
                     </button>
                 </div>
             </Popup>
+
+            <Popup open={showSaveModal} className={'addPage-popup'} onClose={() => setShowSaveModal(false)}>     
+                <h4 className={'font-bold mt-3 text-center'}>Are you sure you want to save?</h4>
+                <div className={'w-full flex align-middle justify-between mt-8'}>
+                    <button onClick={() => setShowSaveModal(false)}
+                        className={'bg-red-800 text-white border border-solid shadow-sm border-white border-opacity-30 rounded-xl px-4 py-2'}>
+                        Cancel
+                    </button>
+                    <button onClick={handleSave}
+                        className={'bg-green-800 text-white border border-solid shadow-sm border-white border-opacity-30 rounded-xl px-4 py-2'}>
+                        Save
+                    </button>
+                </div>
+            </Popup>
+                    
+
+
             <div className="mt-6 flex flex-col px-5">
                 {showToast.show && (
                     <Toast mode={showToast.mode} message={showToast.message}/>
@@ -215,7 +234,7 @@ export const EditPage = () => {
                     <div className="justify-center px-9 py-3 whitespace-nowrap bg-red-600 rounded-xl border border-solid shadow-sm border-white border-opacity-30" onClick={() => navigate(-1)}>
                         Cancel
                     </div>
-                    <div className="justify-center px-4 py-2.5 bg-green-800 rounded-xl border border-solid shadow-sm border-white border-opacity-30" onClick={handleSave}>
+                    <div className="justify-center px-4 py-2.5 bg-green-800 rounded-xl border border-solid shadow-sm border-white border-opacity-30" onClick={() => setShowSaveModal(true)}>
                         {page != null ? 'Edit page' : 'Create Page'}
                     </div>
                 </div>

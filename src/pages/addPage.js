@@ -74,13 +74,14 @@ export const AddPagePopup = (props) => {
                         onChange={setSelectedOption}
                 />
             </div>
+            <p className={'font-size-sm mt-8'}>Once the page is created it will be saved in memory and cannot be cancelled.</p>
             <div className={'w-full flex align-middle justify-between mt-8'}>
                 <button onClick={props.onClose}
                     className={'bg-red-800 text-white border border-solid shadow-sm border-white border-opacity-30 rounded-xl px-4 py-2'}>
                     Cancel
                 </button>
-                <button onClick={onCreatePage}
-                    className={'bg-green-800 text-white border border-solid shadow-sm border-white border-opacity-30 rounded-xl px-4 py-2'}>
+                <button onClick={onCreatePage} disabled={title === ''}
+                    className={` ${title==='' ? 'bg-neutral-400' : 'bg-green-800'} text-white border border-solid shadow-sm border-white border-opacity-30 rounded-xl px-4 py-2`}>
                     Create page
                 </button>
             </div>

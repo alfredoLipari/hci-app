@@ -9,7 +9,7 @@ import { FirstTitle } from "./firstTitle.js";
 import { SecondTitle } from "./secondTitle.js";
 import { Paragraph } from "./paragraph.js";
 import { Toast } from "./toast.js";
-import {AddPagePopup} from "../pages/addPage";
+import Popup from "reactjs-popup";
 
 export const Page = ({ idPageOptional }) => {
     const { id } = useParams();
@@ -26,9 +26,12 @@ export const Page = ({ idPageOptional }) => {
 
     const [comment, setComment] = useState("");
 
+    const [showCommentPopup, setShowCommentPopup] = useState(false);
+
     const handleComment = () => {
         addComment(page.id, comment);
         setShowToast({ mode: "success", message: "Comment added!", show: true });
+        setShowCommentPopup(false);
         setComment("");
         setTimeout(() => {
             setShowToast({ mode: "success", message: "", show: false });
@@ -82,12 +85,27 @@ export const Page = ({ idPageOptional }) => {
                     </div>
                 </div>
 
+
+              <Popup open={showCommentPopup} className={'addPage-popup'} onClose={() => setShowCommentPopup(false)}>     
+                <h4 className={'font-bold mt-3 text-center'}>Are you sure you want to comment?</h4>
+                <div className={'w-full flex align-middle justify-between mt-8'}>
+                    <button onClick={() => setShowCommentPopup(false)}
+                        className={'bg-red-800 text-white border border-solid shadow-sm border-white border-opacity-30 rounded-xl px-4 py-2'}>
+                        Cancel
+                    </button>
+                    <button onClick={handleComment}
+                        className={'bg-green-800 text-white border border-solid shadow-sm border-white border-opacity-30 rounded-xl px-4 py-2'}>
+                        Save
+                    </button>
+                </div>
+            </Popup>
+
      {isLogged &&  <div className="flex gap-5 justify-between pb-2 px-3">
           <div className="my-auto text-sm tracking-wide text-black">
             Posting as username
             <br />
           </div>
-          <div className="flex flex-col justify-center text-xs text-center text-neutral-100" onClick={() => comment !== '' && handleComment()}>
+          <div className="flex flex-col justify-center text-xs text-center text-neutral-100" onClick={() => comment !== '' && setShowCommentPopup(true)}>
             <div className="flex gap-1 items-start py-1 pr-5 pl-px bg-sky-500 rounded-xl border border-solid shadow-sm border-white border-opacity-30">
               <img
                 loading="lazy"
