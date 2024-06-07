@@ -57,13 +57,14 @@ export const EditPage = () => {
             .replace(/<LinkComponent\s+title="([^"]+)"\s*\/>/g, 'link:$1 ') // Replace LinkComponent with link
             .replace(/<Paragraph\s+title="([^"]+)"\s*\/>/g, 'p:$1 ') // Replace LinkComponent with link
             .replace(/<>\s*/g, '') // Remove opening <>
-            .replace(/\s*<\/>/g, ''); // Remove closing </>
+            .replace(/\s*<\/>/g, '') // Remove closing </>
+            .replace(/<Tags\s*[^>]*\/>/g, ''); // Remove tags </>
     };
 
     const componentsToJsxString = (componentString) => {
 
         // Start with enclosing the overall structure.
-        let transformed = `<><Hero title="${title.replace(/"/g, '&quot;')}" subtitle="${subtitle.replace(/"/g, '&quot;')}" />`;
+        let transformed = `<><Hero title="${title.replace(/"/g, '&quot;')}" subtitle="${subtitle.replace(/"/g, '&quot;')}" /> <Tags />`;
 
         // Process each line individually to prevent overlaps
         const lines = componentString.split(/ (?=h1:|h2:|link:|p:)/);  // Splitting while keeping delimiters

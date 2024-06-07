@@ -10,6 +10,7 @@ import { SecondTitle } from "./secondTitle.js";
 import { Paragraph } from "./paragraph.js";
 import { Toast } from "./toast.js";
 import Popup from "reactjs-popup";
+import { Tags } from "./tags.js";
 
 export const Page = ({ idPageOptional }) => {
     const { id } = useParams();
@@ -27,6 +28,8 @@ export const Page = ({ idPageOptional }) => {
     const [comment, setComment] = useState("");
 
     const [showCommentPopup, setShowCommentPopup] = useState(false);
+
+    const [tags, setTags] = useState(page.tags);
 
     const handleComment = () => {
         addComment(page.id, comment);
@@ -53,6 +56,7 @@ export const Page = ({ idPageOptional }) => {
                         FirstTitle,
                         SecondTitle,
                         Paragraph,
+                        Tags
                     }}
                     jsx={page.content}
                 />
