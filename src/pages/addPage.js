@@ -59,7 +59,8 @@ export const AddPagePopup = (props) => {
                     className="z-50 absolute bottom-2 start-0 left-1 flex items-center pointer-events-none">
                     <img src={agenda} className="z-50 w-6 h-6 flex self-center ml-1" alt='search'/>
                 </div>
-                <input type={'text'} placeholder={'%page-name-example%'}
+                <label> The name of the page will be used as link for the other pages </label>
+                <input type={'text'} placeholder={'Page Name'}
                        value={title}
                        onChange={(event) => setTitle(event.target.value)}
                        className="w-full flex relative gap-2 py-2 pr-2 pl-8 mt-3 text-sm tracking-wide whitespace-nowrap rounded-lg border border-solid bg-neutral-50 border-neutral-900 border-opacity-10 text-neutral-900 text-opacity-40"/>

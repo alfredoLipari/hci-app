@@ -16,7 +16,7 @@ import {WikiContext} from '../context/WikiContext';
 export const Header = (props) => {
 
     const { id } = useParams();
-    console.log('newId', id)
+
     const navigate = useNavigate();
 
     const {languages,language, setLanguage, pages, isLogged, setIsLogged, setShowToast } = useContext(WikiContext)
@@ -26,6 +26,10 @@ export const Header = (props) => {
     const [openSearch, setOpenSearch] = useState(false)
 
     const [valueSearch, setValueSearch] = useState('')
+
+    // retrieve all the languages available if the page is available in that language and retrieve all other pages with the same id to do same check
+    const pagesAvailable = pages.filter(page => page.id === (id === undefined ? 1 : parseInt(id)))
+    const languagesAvailable = languages.filter(lang => pagesAvailable.some(page => page.language === lang)).map(lang => lang)
 
     return (
         <div className="flex flex-auto flex-col pt-3 mt-5 text-xl font-bold text-center text-black border-b border-black border-solid ">
@@ -72,7 +76,7 @@ export const Header = (props) => {
 
             {openLanugage && <div className="absolute right-0 z-10 mt-10 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                 <div className="py-1" role="none">
-                    {languages.map((languageAvailable) => (
+                    {languagesAvailable.map((languageAvailable) => (
                         <a className={` ${languageAvailable == language ? 'bg-blue-500' : 'text-gray-700 '} block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0"`} onClick={() => {
                             setLanguage(languageAvailable);
                             setOpenLanguage(false)
