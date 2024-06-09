@@ -12,6 +12,8 @@ import { Toast } from "./toast.js";
 import Popup from "reactjs-popup";
 import { Tags } from "./tags.js";
 import {Sidebar} from "./sidebar.js"
+import {usePreviousRoute} from "../customHooks/usePreviousRoutes";
+import {Breadcrumb} from "./breadcrumb";
 
 export const Page = ({ idPageOptional, openAddPagePopup }) => {
     const { id } = useParams();
@@ -31,6 +33,8 @@ export const Page = ({ idPageOptional, openAddPagePopup }) => {
     const [showCommentPopup, setShowCommentPopup] = useState(false);
 
     const [tags, setTags] = useState(page.tags);
+    const previousRoutes = usePreviousRoute()
+    console.log('previousRoutes', previousRoutes)
 
     const handleComment = () => {
         addComment(page.id, comment);
@@ -48,6 +52,8 @@ export const Page = ({ idPageOptional, openAddPagePopup }) => {
             {showToast.show && (
                 <Toast mode={showToast.mode} message={showToast.message} />
             )}
+
+            {!!previousRoutes.length && <Breadcrumb path={previousRoutes} />}
 
             <div>
                 <JsxParser
