@@ -16,6 +16,8 @@ export const WikiProvider = ({ children }) => {
 
     const [languages] = useState(['en', 'it']);
 
+    const [openSideBar, setOpenSideBar] = useState(false)
+
     const [isLogged, setIsLogged] = useState(false);
 
     const [showToast, setShowToast] = useState({

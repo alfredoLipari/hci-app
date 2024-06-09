@@ -11,6 +11,7 @@ import { Paragraph } from "./paragraph.js";
 import { Toast } from "./toast.js";
 import Popup from "reactjs-popup";
 import { Tags } from "./tags.js";
+import {Sidebar} from "./sidebar.js"
 
 export const Page = ({ idPageOptional }) => {
     const { id } = useParams();
@@ -43,6 +44,7 @@ export const Page = ({ idPageOptional }) => {
 
     return (
         <div>
+            <Sidebar />
             {showToast.show && (
                 <Toast mode={showToast.mode} message={showToast.message} />
             )}
