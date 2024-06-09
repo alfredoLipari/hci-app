@@ -13,7 +13,7 @@ import Popup from "reactjs-popup";
 import { Tags } from "./tags.js";
 import {Sidebar} from "./sidebar.js"
 
-export const Page = ({ idPageOptional }) => {
+export const Page = ({ idPageOptional, openAddPagePopup }) => {
     const { id } = useParams();
     console.log('newIdCorrect', id)
     const { pages, addComment, language, showToast, setShowToast, isLogged } = useContext(WikiContext);
@@ -44,7 +44,7 @@ export const Page = ({ idPageOptional }) => {
 
     return (
         <div>
-            <Sidebar />
+            <Sidebar  openAddPagePopup={openAddPagePopup}/>
             {showToast.show && (
                 <Toast mode={showToast.mode} message={showToast.message} />
             )}

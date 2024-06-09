@@ -18,11 +18,11 @@ export function App() {
                 {/*  <Navigation /> */}
                 <AddPagePopup open={isPopupOpen} onClose={() => setPopupOpen(false)}/>
                 <Routes>
-                    <Route path="/page/:id" element={<><Header openAddPagePopup={() => setPopupOpen(true)}/><Page /></>} />
+                    <Route path="/page/:id" element={<><Header openAddPagePopup={() => setPopupOpen(true)}/><Page openAddPagePopup={() => setPopupOpen(true)} /></>} />
                     <Route path="/edit/:id" element={<><Header openAddPagePopup={() => setPopupOpen(true)}/><EditPage /></>} />
                     <Route path={'login'} element={<><Header openAddPagePopup={() => setPopupOpen(true)}/><LoginPage /></>} />
                     <Route path={'signup'} element={<><Header openAddPagePopup={() => setPopupOpen(true)}/><SignupPage /></>} />
-                    <Route path="*" element={<><Header openAddPagePopup={() => setPopupOpen(true)}/><Page idPageOptional={1}/></>} />
+                    <Route path="*" element={<><Header openAddPagePopup={() => setPopupOpen(true)}/><Page idPageOptional={1} openAddPagePopup={() => setPopupOpen(true)}/></>} />
                 </Routes>
             </Router>
         </WikiProvider>

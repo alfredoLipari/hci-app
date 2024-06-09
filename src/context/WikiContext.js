@@ -20,6 +20,8 @@ export const WikiProvider = ({ children }) => {
 
     const [isLogged, setIsLogged] = useState(false);
 
+    const [openSearch, setOpenSearch] = useState(false);
+
     const [showToast, setShowToast] = useState({
         "mode": "success",
         "message": "test",
@@ -46,7 +48,7 @@ export const WikiProvider = ({ children }) => {
     }
 
     return (
-        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, language, setLanguage,languages, showToast, setShowToast, setIsLogged, addComment, setPages }}>
+        <WikiContext.Provider value={{ pages, addPage, updatePage, isLogged, language, setLanguage,languages, showToast, setShowToast, setIsLogged, addComment, setPages, openSideBar, setOpenSideBar, setOpenSearch, openSearch }}>
             {children}
         </WikiContext.Provider>
     );
