@@ -40,7 +40,7 @@ export const LoginPage = () => {
                     <div className="z-50 absolute bottom-2 start-0 left-1 flex items-center pointer-events-none">
                         <img src={lock} className="z-50 w-6 h-6 flex self-center" alt='search'/>
                     </div>
-                    <input type={'text'} type={'password'} placeholder={'Enter password'}
+                    <input type={'password'} placeholder={'Enter password'}
                            className="w-full flex relative gap-2 py-2 pr-2 pl-8 mt-2 text-sm tracking-wide whitespace-nowrap rounded-lg border border-solid bg-neutral-50 border-neutral-900 border-opacity-10 text-neutral-900 text-opacity-40"/>
                 </div>
                 <button
@@ -61,16 +61,16 @@ export const LoginPage = () => {
                     Log in
                 </button>
                 <div className="flex relative gap-px mt-5 text-white">
-                    <div className="flex flex-col flex-1">
+                    <div className="flex flex-col flex-1 items-center">
                         <div className="flex gap-0.5 text-xs text-center whitespace-nowrap">
                             <div className="shrink-0 my-auto h-px bg-white rounded-[100px] w-[178px]"/>
                             <div>or</div>
                         </div>
-                        <div className="mt-7 text-base font-semibold underline">
-                            Forgot your password?
+                        <div className="mt-7 text-base font-semibold underline"  onClick={() => navigate("/")}>
+                            Go back
                         </div>
                     </div>
-                    <div className="flex flex-col flex-1 bold">
+                    <div className="flex flex-col flex-1 bold items-center">
                         <div className="shrink-0 my-auto h-px bg-white rounded-[100px] w-[178px]"/>
                         <div className="mt-7 text-base font-semibold underline"><Link to={'/signup'}>Create an account</Link></div>
                     </div>

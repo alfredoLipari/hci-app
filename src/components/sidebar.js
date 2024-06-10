@@ -22,10 +22,19 @@ export const Sidebar = ({ openAddPagePopup }) => {
     setShowToast,
     setOpenSideBar,
     setOpenSearch,
-    openSearch
+    openSearch,
+    pages
   } = useContext(WikiContext);
 
   const [openLanugage, setOpenLanguage] = useState(false);
+
+  const pagesAvailable = pages.filter(
+    (page) => page.id === (id === undefined ? 1 : parseInt(id))
+  );
+
+  const languagesAvailable = languages
+    .filter((lang) => pagesAvailable.some((page) => page.language === lang))
+    .map((lang) => lang);
 
   return (
     <aside
@@ -36,8 +45,8 @@ export const Sidebar = ({ openAddPagePopup }) => {
       aria-label="Sidebar"
     >
       <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-        <ul class="space-y-2 font-medium">
-          <li className="text-center">
+        <ul class="flex flex-col space-y-2 font-medium">
+          <li className="self-center  text-center">
             <img
               src={bookImage}
               className="w-9 h-9"
@@ -93,7 +102,7 @@ export const Sidebar = ({ openAddPagePopup }) => {
                 tabIndex="-1"
               >
                 <div className="py-1" role="none">
-                  {languages.map((languageAvailable) => (
+                  {languagesAvailable.map((languageAvailable) => (
                     <a
                       className={` ${
                         languageAvailable == language
@@ -101,6 +110,7 @@ export const Sidebar = ({ openAddPagePopup }) => {
                           : "text-gray-700 "
                       } block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0"`}
                       onClick={() => {
+                        setOpenSideBar(false)
                         setLanguage(languageAvailable);
                         setOpenLanguage(false);
                       }}
@@ -134,11 +144,7 @@ export const Sidebar = ({ openAddPagePopup }) => {
 
           {isLogged && (
             <>
-              <li onClick={openAddPagePopup}>
-                <Link
-                  to={"/edit/" + (id || 1)}
-                  className="flex items-center p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
+              <li onClick={() => {openAddPagePopup(); setOpenSideBar(false)}}   className="flex items-center p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <svg
                     className="flex-shrink-0 w-8 h-8 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true"
@@ -149,12 +155,13 @@ export const Sidebar = ({ openAddPagePopup }) => {
                     <path d="M 43,30L 50.75,30L 43,22.25L 43,30 Z M 52,34L 39,34L 39,21L 24,21L 24,45L 20,45L 20,17L 43.25,17L 56,29.75L 56,59L 34,59L 34,55L 52,55L 52,34 Z M 28,38L 33,38L 33,46L 41,46L 41,51L 33,51L 33,59L 28,59L 28,51L 20,51L 20,46L 28,46L 28,38 Z M 20,59L 20,52L 24,52L 24,55L 27,55L 27,59L 20,59 Z" />
                   </svg>
                   <span class="flex-1 ms-2 whitespace-nowrap">Add Page</span>
-                </Link>
+               
               </li>
               <li>
               <Link
                   to={"/edit/" + (id || 1)}
                   className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  onClick={() => setOpenSideBar(false)}
                 >
                   <svg
                     class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -175,6 +182,7 @@ export const Sidebar = ({ openAddPagePopup }) => {
           {!isLogged ? (
             <li
               onClick={() => {
+                setOpenSideBar(false)
                 navigate("/login");
               }}
             >

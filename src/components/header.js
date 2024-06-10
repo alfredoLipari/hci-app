@@ -72,12 +72,12 @@ export const Header = (props) => {
             data-drawer-toggle="default-sidebar"
             aria-controls="default-sidebar"
             type="button"
-            class="self-center inline-flex items-center p-2 mt-2 ms-3 text-sm  rounded-lg sm:hidden focus:outline-none "
+            class="flex self-center inline-flex items-center p-2  ms-3 text-sm  rounded-lg sm:hidden focus:outline-none "
             onClick={() => setOpenSideBar(!openSideBar)}
           >
             <span class="sr-only">Open sidebar</span>
             <svg
-              class="w-6 h-6"
+              class="w-7 h-7"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -90,9 +90,9 @@ export const Header = (props) => {
               ></path>
             </svg>
           </button>
-          <div className={`flex self-center ${isLogged ? "mx-2" : "mx-5"}`}>
+          <h1 className={`flex self-center mx-3 text-2xl`}>
             {isLogged ? "Wiki Admin" : "Wiki for immigrants"}
-          </div>
+          </h1>
 
 
          
