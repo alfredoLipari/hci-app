@@ -86,7 +86,7 @@ export const Sidebar = ({ openAddPagePopup }) => {
 
             {openLanugage && (
               <div
-                className="absolute right-10 z-10 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                className="absolute right-5 z-10 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="menu-button"
@@ -130,35 +130,6 @@ export const Sidebar = ({ openAddPagePopup }) => {
               </svg>
               <span class="flex-1 ms-3 whitespace-nowrap">Search</span>
             </a>
-
-            {openLanugage && (
-              <div
-                className="absolute right-10 z-10 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="menu-button"
-                tabIndex="-1"
-              >
-                <div className="py-1" role="none">
-                  {languages.map((languageAvailable) => (
-                    <a
-                      className={` ${
-                        languageAvailable == language
-                          ? "bg-blue-500"
-                          : "text-gray-700 "
-                      } block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0"`}
-                      onClick={() => {
-                        setLanguage(languageAvailable);
-                        setOpenLanguage(false);
-                      }}
-                      key={languageAvailable}
-                    >
-                      {languageAvailable}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
           </li>
 
           {isLogged && (

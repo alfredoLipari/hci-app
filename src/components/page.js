@@ -69,7 +69,9 @@ export const Page = ({ idPageOptional, openAddPagePopup }) => {
                     jsx={page.content}
                 />
 
-                <div className="flex flex-col justify-center px-3 text-sm whitespace-nowrap mt-5 ">
+    {!page.title === 'Home' &&  
+    <>
+        <div className="flex flex-col justify-center px-3 text-sm whitespace-nowrap mt-5 ">
                     <div className="flex flex-col pb-4 w-full bg-white">
                         <div className="flex gap-1.5 px-5 font-semibold text-center text-white rounded bg-slate-500">
                             <img
@@ -111,8 +113,10 @@ export const Page = ({ idPageOptional, openAddPagePopup }) => {
                     </button>
                 </div>
             </Popup>
+            </>}
+       
 
-     {isLogged &&  <div className="flex gap-5 justify-between pb-2 px-3">
+     {(isLogged && page.title !== 'Home') &&   <div className="flex gap-5 justify-between pb-2 px-3">
           <div className="my-auto text-sm tracking-wide text-black">
             Posting as username
             <br />
@@ -142,7 +146,9 @@ export const Page = ({ idPageOptional, openAddPagePopup }) => {
                             </div>
                         </div>
                     </div>
-                ))}
+                  
+                ))} 
+                
             </div>
         </div>
     );

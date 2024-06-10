@@ -64,8 +64,8 @@ export const Header = (props) => {
   }  
 
   return (
-    <div className="flex flex-auto flex-col pt-3 mt-5 text-xl font-bold text-center text-black border-b border-black border-solid ">
-      <div className="flex text-center self-center max-w-[404px]">
+    <div className="flex flex-auto flex-col  mt-5 text-xl font-bold text-center text-black border-b border-black border-solid ">
+      <div className="flex justify-between text-center ">
         <div className="flex flex-auto  px-3 items-center">
         <button
             data-drawer-target="default-sidebar"
